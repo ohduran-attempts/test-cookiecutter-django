@@ -24,4 +24,7 @@ def xsum(numbers):
 
 @shared_task(name="print_msg_with_name")
 def print_message(name, *args, **kwargs):
+    for i in range(3):
+        sleep(1)
+        print(f'{i} seconds')
     print("Celery is working!! {} have implemented it correctly.".format(name))
