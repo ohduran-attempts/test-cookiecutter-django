@@ -5,6 +5,7 @@ import logging
 from time import sleep
 
 from celery import shared_task
+from instapy import InstaPy
 
 
 @shared_task
