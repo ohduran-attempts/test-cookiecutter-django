@@ -5,6 +5,7 @@ import logging
 from time import sleep
 
 from celery import shared_task
+from config.settings.local import PASSWORD, USERNAME
 from instapy import InstaPy
 
 
@@ -29,3 +30,11 @@ def print_message(name, *args, **kwargs):
         sleep(1)
         print(f'{i} seconds')
     print("Celery is working!! {} have implemented it correctly.".format(name))
+
+@shared_task()
+def check_session(username=USERNAME, password=PASSWORD):
+    bot = InstaPy(username=username, password=password,
+              selenium_local_session=False)
+    bot.set_selenium_remote_session(selenium_url='http://selenium:4444/wd/hub')
+    bot.login()
+    bot.end()
